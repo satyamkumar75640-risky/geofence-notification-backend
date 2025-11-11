@@ -16,7 +16,11 @@ app.use(cors({
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/geo-fenced-notifications', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  maxPoolSize: 10,
+  minPoolSize: 2
 }).then(() => console.log('MongoDB connected')).catch(err => console.error('MongoDB error:', err));
 
 const userSchema = new mongoose.Schema({
